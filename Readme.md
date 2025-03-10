@@ -53,13 +53,20 @@ server.port=8080
 ### Step 4: Build the Project
 Run the following command from the project root directory:
 ```bash
-mvn clean install
+./mvnw clean install
 ```
 
 ### Step 5: Run the Application
 To start the Spring Boot application, execute:
 ```bash
-mvn spring-boot:run
+./mvnw  spring-boot:run
+```
+
+### Step 6: Or Run the JAR File
+To start the Spring Boot application, execute:
+```bash
+cd target
+java -jar movie-management-SNAPSHOT.jar
 ```
 The server will start and be available at `http://localhost:8080`.
 
