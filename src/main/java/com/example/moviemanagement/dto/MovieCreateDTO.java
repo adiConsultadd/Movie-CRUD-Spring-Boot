@@ -15,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieCreateDTO {
+
     @NotBlank(message = "Title is required")
     private String title;
 

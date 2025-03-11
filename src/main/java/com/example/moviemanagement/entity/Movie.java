@@ -13,8 +13,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Movie {
-
+public class Movie{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

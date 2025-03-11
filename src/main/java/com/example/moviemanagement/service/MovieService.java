@@ -30,15 +30,4 @@ public interface MovieService {
     // Search movies by title
     List<MovieDTO> searchMoviesByTitle(String title);
 
-    // Search movies by director
-    List<MovieDTO> searchMoviesByDirector(String director);
-
-    // Search movies by genre
-    List<MovieDTO> searchMoviesByGenre(String genre);
-
-    // Search movies by minimum rating
-    List<MovieDTO> searchMoviesByMinRating(Double rating);
-
-    // Search movies by language
-    List<MovieDTO> searchMoviesByLanguage(String language);
 }

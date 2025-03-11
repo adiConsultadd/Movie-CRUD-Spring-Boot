@@ -25,7 +25,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public MovieDTO createMovie(MovieCreateDTO movieCreateDTO) {
-        // Convert DTO to entity
         Movie movie = new Movie();
         movie.setTitle(movieCreateDTO.getTitle());
         movie.setDescription(movieCreateDTO.getDescription());
@@ -37,10 +36,8 @@ public class MovieServiceImpl implements MovieService {
         movie.setLanguage(movieCreateDTO.getLanguage());
         movie.setPosterUrl(movieCreateDTO.getPosterUrl());
 
-        // Save the movie
-        Movie savedMovie = movieRepository.save(movie);
 
-        // Convert entity back to DTO and return
+        Movie savedMovie = movieRepository.save(movie);
         return convertToDTO(savedMovie);
     }
 
@@ -63,7 +60,6 @@ public class MovieServiceImpl implements MovieService {
         Movie existingMovie = movieRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
 
-        // Update all fields
         existingMovie.setTitle(movieUpdateDTO.getTitle());
         existingMovie.setDescription(movieUpdateDTO.getDescription());
         existingMovie.setReleaseDate(movieUpdateDTO.getReleaseDate());
@@ -83,7 +79,6 @@ public class MovieServiceImpl implements MovieService {
         Movie existingMovie = movieRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
 
-        // Update only non-null fields
         if (moviePatchDTO.getTitle() != null) {
             existingMovie.setTitle(moviePatchDTO.getTitle());
         }
@@ -131,35 +126,7 @@ public class MovieServiceImpl implements MovieService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<MovieDTO> searchMoviesByDirector(String director) {
-        return movieRepository.findByDirectorContainingIgnoreCase(director).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MovieDTO> searchMoviesByGenre(String genre) {
-        return movieRepository.findByGenre(genre).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MovieDTO> searchMoviesByMinRating(Double rating) {
-        return movieRepository.findByRatingGreaterThanEqual(rating).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MovieDTO> searchMoviesByLanguage(String language) {
-        return movieRepository.findByLanguageIgnoreCase(language).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    // Helper method to convert Movie entity to MovieDTO
+    //This converts Movie Entity To MovieDTO
     private MovieDTO convertToDTO(Movie movie) {
         MovieDTO movieDTO = new MovieDTO();
         movieDTO.setId(movie.getId());

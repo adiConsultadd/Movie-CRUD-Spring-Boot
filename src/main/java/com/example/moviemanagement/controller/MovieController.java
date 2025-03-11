@@ -24,28 +24,28 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    // CREATE - POST
+    // Create A New Movie
     @PostMapping
     public ResponseEntity<MovieDTO> createMovie(@Valid @RequestBody MovieCreateDTO movieCreateDTO) {
         MovieDTO createdMovie = movieService.createMovie(movieCreateDTO);
         return new ResponseEntity<>(createdMovie, HttpStatus.CREATED);
     }
 
-    // READ - GET (all)
+    //Get All Movies
     @GetMapping
     public ResponseEntity<List<MovieDTO>> getAllMovies() {
         List<MovieDTO> movies = movieService.getAllMovies();
         return ResponseEntity.ok(movies);
     }
 
-    // READ - GET (by id)
+    // Get A Movie By Id
     @GetMapping("/{id}")
     public ResponseEntity<MovieDTO> getMovieById(@PathVariable Long id) {
         MovieDTO movie = movieService.getMovieById(id);
         return ResponseEntity.ok(movie);
     }
 
-    // UPDATE - PUT
+    // Update An Existing Movie (Fully)
     @PutMapping("/{id}")
     public ResponseEntity<MovieDTO> updateMovie(
             @PathVariable Long id,
@@ -54,7 +54,7 @@ public class MovieController {
         return ResponseEntity.ok(updatedMovie);
     }
 
-    // UPDATE - PATCH
+    // Update An Existing Movie (Partially)
     @PatchMapping("/{id}")
     public ResponseEntity<MovieDTO> patchMovie(
             @PathVariable Long id,
@@ -63,14 +63,14 @@ public class MovieController {
         return ResponseEntity.ok(patchedMovie);
     }
 
-    // DELETE
+    // Delete An Existing Movie
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
     }
 
-    // SEARCH - by title
+    // Search For An Existing Movie By Title
     @GetMapping("/search/title")
     public ResponseEntity<List<MovieDTO>> searchMoviesByTitle(@RequestParam String title) {
         List<MovieDTO> movies = movieService.searchMoviesByTitle(title);
